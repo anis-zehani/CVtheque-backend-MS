@@ -1,0 +1,43 @@
+package com.odix.fr.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import com.odix.fr.model.Opportunite;
+
+public interface OpportuniteService {
+	
+	public List<Opportunite> getAllOpportunites(String etat);
+	
+	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(Long idUtilisateur);
+	
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(String etat, Long idPartenaire);
+	
+	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
+	
+	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie);
+	
+	public List<Opportunite> getAllOpportunitesByListTechnologies(ArrayList<Long> listTechnologies);
+	
+	public List<Opportunite> getAllOpportunitesByCertification(Long idCertification);
+	
+	public Optional<Opportunite> getOpportunite(Long id);
+	
+	
+	public Opportunite addOpportunite(Opportunite opportunite);
+	
+	public Opportunite editOpportunite(Opportunite opportunite);
+	
+	public Opportunite editEtatOpportunite(Opportunite opportunite);
+	
+	
+	public void deleteOpportunite(Long idOpportunite);
+	
+	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie);
+	
+	public void deleteLinkOpportuniteCertification(Long idOpportunite, Long idCertification);
+	
+	public void updateLinkOpportunitePartenaire(Long idOpportunite);
+
+}

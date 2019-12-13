@@ -1,0 +1,31 @@
+package com.odix.fr.service;
+
+import java.util.List;
+
+import com.odix.fr.model.Partenaire;
+
+public interface PartenaireService {
+	
+	public List<Partenaire> getAllPartenaires(String etat);
+	
+	public List<Partenaire> getAllPartenairesByEntreprise(Long idEntreprise);
+	
+	public Partenaire getPartenaire(Long id);
+	
+	public Partenaire addPartenaire(Partenaire partenaire);
+	
+	public Partenaire editPartenaire(Partenaire partenaire);
+	
+	public Partenaire editPartenaireAutoFill(Partenaire partenaire);
+	
+	public Partenaire editEtatPartenaire(Partenaire partenaire);
+	
+	public void updateLinkPartenaireEntreprise(Long idPartenaire);
+	
+	public Boolean deletePartenaire(Long id);
+
+	public Partenaire addPhotoToPartenaire(Long id, String urlPhoto);
+	
+	public Partenaire addPhotoToPartenaireAutoFill(Long id, String urlPhoto);
+
+}

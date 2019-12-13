@@ -1,0 +1,47 @@
+package com.odix.fr.repository;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.odix.fr.model.Technologie;
+
+@Repository
+public interface TechnologieRepository extends JpaRepository<Technologie, Long> {
+	
+	Technologie findByNomTechnologie(@Param("nomTechnologie") String nomTechnologie);
+	
+	// UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie
+	@Modifying
+	@Transactional
+	@Query("UPDATE Technologie t SET t.statNombreCandidatsLies = :nombreCandidats, t.statNombreOpportunitesLiees = :nombreOpportunites WHERE t.id = :idTechnologie")
+	void updateNombreCandidatsAndNombreOpportunitesStats(@Param("idTechnologie") Long idTechnologie, @Param("nombreCandidats") Integer nombreCandidats, @Param("nombreOpportunites") Integer nombreOpportunites);
+
+	
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des candidats qu'il y a pour elle
+	@Query(value="SELECT * FROM Technologie t"
+			+ " ORDER BY t.stat_nombre_candidats_lies DESC"
+			+ " LIMIT 5", nativeQuery = true)
+	List<Technologie> candidatsByTechnologie();
+	
+	
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des opportunités qu'il y a pour elle
+	@Query(value="SELECT * FROM Technologie t"
+			+ " ORDER BY t.stat_nombre_opportunites_liees DESC"
+			+ " LIMIT 5", nativeQuery = true)
+	List<Technologie> opportunitesByTechnologie();
+	
+	// Retourne la somme des Candidats liés à toutes les technologies
+	@Query(value="SELECT SUM(t.stat_nombre_candidats_lies) FROM Technologie t", nativeQuery = true)
+	List<Integer> sumCandiatsByTechnologies();
+	
+	// Retourne la somme des opportunités liées à toutes les technologies
+	@Query(value="SELECT SUM(t.stat_nombre_opportunites_liees) FROM Technologie t", nativeQuery = true)
+	List<Integer> sumOpportunitesByTechnologies();
+}

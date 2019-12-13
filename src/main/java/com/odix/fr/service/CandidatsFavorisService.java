@@ -1,0 +1,16 @@
+package com.odix.fr.service;
+
+import java.util.List;
+
+import com.odix.fr.model.CandidatsFavoris;
+
+public interface CandidatsFavorisService {
+	
+	public List<CandidatsFavoris> getAllCandidatsFavorisForUtilisateur(Long idUtilisateur);
+	
+	public CandidatsFavoris addCandidatToFavorisToUtilisateur(CandidatsFavoris candidatsFavoris);
+	
+	public void deleteCandidatFromFavorisToUtilisateur(Long idCandidatFavori);
+	
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(Long idUtilisateur, Long idUCandidat);
+}
