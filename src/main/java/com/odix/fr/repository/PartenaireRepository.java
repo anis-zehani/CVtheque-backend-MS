@@ -1,6 +1,7 @@
 package com.odix.fr.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -15,7 +16,7 @@ import com.odix.fr.model.Etat;
 import com.odix.fr.model.Partenaire;
 
 @Repository
-public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
+public interface PartenaireRepository extends JpaRepository<Partenaire, UUID> {
 	
 	Partenaire findByIdentite(@Param("identite") String identite);
 	
@@ -31,7 +32,7 @@ public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
 	@Modifying
 	@Transactional
 	@Query("UPDATE Partenaire p SET p.entreprise = null WHERE p.id = :idPartenaire")
-	void updateLinkPartenaireEntreprise(@Param("idPartenaire") Long idPartenaire);
+	void updateLinkPartenaireEntreprise(@Param("idPartenaire") UUID idPartenaire);
 
 	
 }

@@ -1,6 +1,7 @@
 package com.odix.fr.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,14 +26,14 @@ public class CandidatsFavorisController {
 	
 	// Lister les Candidats Favoris pour un Utilisateur
 	@GetMapping("/getAllCandidatsFavorisForUtilisateur/{idUtilisateur}")
-	public List<CandidatsFavoris> getAllCandidatsFavorisForUtilisateur(@PathVariable Long idUtilisateur){
+	public List<CandidatsFavoris> getAllCandidatsFavorisForUtilisateur(@PathVariable UUID idUtilisateur){
 		
 		return candidatsFavorisService.getAllCandidatsFavorisForUtilisateur(idUtilisateur);
 	}
 	
 	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
 	@GetMapping("/checkIfCandidatExistsDansFavorisUtilisateur/{idUtilisateur}/{idCandidat}")
-	public boolean checkIfCandidatExistsDansFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idCandidat) {
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(@PathVariable UUID idUtilisateur, @PathVariable UUID idCandidat) {
 		
 		return candidatsFavorisService.checkIfCandidatExistsDansFavorisUtilisateur(idUtilisateur, idCandidat);
 	}
@@ -46,7 +47,7 @@ public class CandidatsFavorisController {
 	
 	// Supprimer un Candidat Favoris pour un Utilisateur
 	@DeleteMapping("/deleteCandidatFromFavorisToUtilisateur/{idCandidatFavori}")
-	public void deleteCandidatFromFavorisToUtilisateur(@PathVariable Long idCandidatFavori) {
+	public void deleteCandidatFromFavorisToUtilisateur(@PathVariable UUID idCandidatFavori) {
 		
 		candidatsFavorisService.deleteCandidatFromFavorisToUtilisateur(idCandidatFavori);
 	}

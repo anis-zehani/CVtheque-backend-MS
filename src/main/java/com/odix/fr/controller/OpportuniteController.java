@@ -3,6 +3,7 @@ package com.odix.fr.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -59,7 +60,7 @@ public class OpportuniteController {
 	
 	//La liste des Opportunités pour une Technologie
 	@GetMapping("/allOpportunitesByTechnologie/{id}")
-	public List<Opportunite> getAllOpportunitesByTechnologie(@PathVariable Long id) {
+	public List<Opportunite> getAllOpportunitesByTechnologie(@PathVariable UUID id) {
 		return opportuniteService.getAllOpportunitesByTechnologie(id);
 	}
 	
@@ -108,7 +109,7 @@ public class OpportuniteController {
 	
 	//Supprimer le lien entre une opportunité et une technologie
 	@DeleteMapping("/deleteLinkOpportuniteTechnologie/{idOpportunite}/{idTechnologie}")
-	public void deleteLinkOpportuniteTechnologie(@PathVariable Long idOpportunite, @PathVariable Long idTechnologie) {
+	public void deleteLinkOpportuniteTechnologie(@PathVariable Long idOpportunite, @PathVariable UUID idTechnologie) {
 		opportuniteService.deleteLinkOpportuniteTechnologie(idOpportunite, idTechnologie);
 	}
 	

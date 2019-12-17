@@ -2,6 +2,7 @@ package com.odix.fr.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +28,7 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 		return collaborateurRepository.findAll();
 	}
 
-	public Optional<Collaborateur> getCollaborateur(Long id) {
+	public Optional<Collaborateur> getCollaborateur(UUID id) {
 		return collaborateurRepository.findById(id);
 	}
 
@@ -78,7 +79,7 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 	}
 
 	//Supprimer un collaborateur
-	public void deleteCollaborateur(Long id) {
+	public void deleteCollaborateur(UUID id) {
 		
 		if(collaborateurRepository.existsById(id))
 		{

@@ -1,6 +1,7 @@
 package com.odix.fr.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.odix.fr.model.Technologie;
 
 @Repository
-public interface TechnologieRepository extends JpaRepository<Technologie, Long> {
+public interface TechnologieRepository extends JpaRepository<Technologie, UUID> {
 	
 	Technologie findByNomTechnologie(@Param("nomTechnologie") String nomTechnologie);
 	
@@ -21,7 +22,7 @@ public interface TechnologieRepository extends JpaRepository<Technologie, Long> 
 	@Modifying
 	@Transactional
 	@Query("UPDATE Technologie t SET t.statNombreCandidatsLies = :nombreCandidats, t.statNombreOpportunitesLiees = :nombreOpportunites WHERE t.id = :idTechnologie")
-	void updateNombreCandidatsAndNombreOpportunitesStats(@Param("idTechnologie") Long idTechnologie, @Param("nombreCandidats") Integer nombreCandidats, @Param("nombreOpportunites") Integer nombreOpportunites);
+	void updateNombreCandidatsAndNombreOpportunitesStats(@Param("idTechnologie") UUID idTechnologie, @Param("nombreCandidats") Integer nombreCandidats, @Param("nombreOpportunites") Integer nombreOpportunites);
 
 	
 	// Retourne la liste des 5 premières technologies ORDER BY le nombre des candidats qu'il y a pour elle

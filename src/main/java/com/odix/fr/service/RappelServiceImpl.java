@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class RappelServiceImpl implements RappelService{
 	}
 	
 	//Retourne tous les rappels sans filtre par User
-	public List<Rappel> getAllRappels(Long idUtilisateur) {
+	public List<Rappel> getAllRappels(UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		
@@ -39,7 +40,7 @@ public class RappelServiceImpl implements RappelService{
 	}
 	
 	//Retourne les rappels de Today par User
-	public List<Rappel> getAllRappelsByToday(Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByToday(UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		LocalDate dateToday = LocalDate.now(); 
@@ -48,7 +49,7 @@ public class RappelServiceImpl implements RappelService{
 	}
 	
 	//Retourne les rappels des Next 7 Days par User
-	public List<Rappel> getAllRappelsByNext7Days(Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByNext7Days(UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		LocalDate dateDebut = LocalDate.now(); 
@@ -57,14 +58,14 @@ public class RappelServiceImpl implements RappelService{
 	    return rappelRepository.findByNext7Days(dateDebut, dateFin, utilisateur);
 	}
 	
-	public List<Rappel> getAllRappelsByProjetAndUtilisateur(Projet projet, Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByProjetAndUtilisateur(Projet projet, UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		
 	    return rappelRepository.findByProjetAndUtilisateur(projet, utilisateur);
 	}
 	
-	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, Long idUtilisateur){
+	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, UUID idUtilisateur){
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		

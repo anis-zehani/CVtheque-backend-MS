@@ -1,6 +1,7 @@
 package com.odix.fr.util;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -60,7 +61,7 @@ public class Crons {
 		
 		for(int i=0; i<listeTechnologies.size(); i++) {
 			
-			Long idTechnologie = listeTechnologies.get(i).getId();
+			UUID idTechnologie = listeTechnologies.get(i).getId();
 			
 			nombreCandidats = candidatRepository.findAllCandidatsByTechnologie(idTechnologie).size();
 			nombreOpportunites = opportuniteRepository.findAllOpportunitesByTechnologie(idTechnologie).size();

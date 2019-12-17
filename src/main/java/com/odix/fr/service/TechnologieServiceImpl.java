@@ -3,20 +3,29 @@ package com.odix.fr.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.odix.fr.messaging.TechnologieProducers;
 import com.odix.fr.model.Technologie;
 import com.odix.fr.repository.TechnologieRepository;
 
 @Service
 public class TechnologieServiceImpl implements TechnologieService{
 	
+	@Autowired
+    public final TechnologieProducers technologieProducers;
+	
 	private final TechnologieRepository technologieRepository;
 
-	TechnologieServiceImpl(TechnologieRepository technologieRepository) {
+	TechnologieServiceImpl(TechnologieRepository technologieRepository, TechnologieProducers technologieProducers) {
 		super();
 		this.technologieRepository = technologieRepository;
+		this.technologieProducers = technologieProducers;
 	}
 	
 	public List<Technologie> getAllTechnologies() {
@@ -26,39 +35,56 @@ public class TechnologieServiceImpl implements TechnologieService{
 		return listeTechnologies;
 	}
 	
-	public Technologie getTechnologie(Long id) {
+	public Technologie getTechnologie(UUID id) {
 		
 		return technologieRepository.getOne(id);
 	}
 	
 	//Ajouter une technologie
+	@Transactional
 	public Technologie addTechnologie(Technologie technologie) 
 	{
 		if(technologieRepository.findByNomTechnologie(technologie.getNomTechnologie()) == null)
 		{
-			return technologieRepository.save(technologie);
+			Technologie newTechnologie =  technologieRepository.save(technologie);
+			
+			//Consistency avec les autres MS
+			this.technologieProducers.addTechnologieProducer(newTechnologie);
+			
+			return newTechnologie;
 		}
 		return null;
 	}
 	
 	//Modifier une technologie
+	@Transactional
 	public Technologie editTechnologie(Technologie technologie) 
 	{
 		if(technologieRepository.existsById(technologie.getId()))
 		{
-			return technologieRepository.save(technologie);
+			technologieRepository.save(technologie);
+			
+			//Consistency avec les autres MS
+			this.technologieProducers.editTechnologieProducer(technologie);
+			
+			return technologie;
 		}
 		return null;
 	}
 	
 	//Supprimer une technologie
-	public boolean deleteTechnologie(Long id) 
+	@Transactional
+	public boolean deleteTechnologie(UUID id) 
 	{
 		if(technologieRepository.existsById(id))
 		{
 			try 
 			{
 			technologieRepository.deleteById(id);
+			
+			//Consistency avec les autres MS
+			this.technologieProducers.deleteTechnologieProducer(id);
+
 			return true;
 			}
 			catch(Exception e) 
@@ -71,7 +97,7 @@ public class TechnologieServiceImpl implements TechnologieService{
 	
 	// Statistiques : UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie
 	@Override
-	public void updateNombreCandidatsAndNombreOpportunitesStats(Long idTechnologie, Integer nombreCandidats, Integer nombreOpportunites) {
+	public void updateNombreCandidatsAndNombreOpportunitesStats(UUID idTechnologie, Integer nombreCandidats, Integer nombreOpportunites) {
 		
 		technologieRepository.updateNombreCandidatsAndNombreOpportunitesStats(idTechnologie, nombreCandidats, nombreOpportunites);
 	}

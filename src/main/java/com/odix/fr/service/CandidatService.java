@@ -2,6 +2,7 @@ package com.odix.fr.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.odix.fr.model.Candidat;
 
@@ -11,7 +12,7 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByOpportunite(Long idOpportunite);
 	
-	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie);
+	public List<Candidat> getAllCandidatsByTechnologie(UUID idTechnologie);
 	
 	public List<Candidat> getAllCandidatsByListTechnologies(ArrayList<Long> listTechnologies);
 	
@@ -19,7 +20,7 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByEntreprise(Long idEntreprise);
 	
-	public Candidat getCandidat(Long id);
+	public Candidat getCandidat(UUID id);
 	
 	public Candidat getCandidatByIdLinkedin(String idLinkedin);
 	
@@ -33,26 +34,26 @@ public interface CandidatService {
 	
 	public Candidat editEtatCandidat(Candidat candidat);
 	
-	public void updateLinkCandidatEntreprise(Long idCandidat);
+	public void updateLinkCandidatEntreprise(UUID idCandidat);
 	
 	
-	public void deleteCandidat(Long id);
+	public void deleteCandidat(UUID id);
 	
-	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
+	public void deleteLinkCandidatOpportunite(UUID idCandidat, Long idOpportunite);
 	
-	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie);
+	public void deleteLinkCandidatTechnologie(UUID idCandidat, UUID idTechnologie);
 	
-	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification);
+	public void deleteLinkCandidatCertification(UUID idCandidat, Long idCertification);
 	
 
-	public Candidat addPhotoToCandidat(Long id, String urlPhoto);
+	public Candidat addPhotoToCandidat(UUID id, String urlPhoto);
 	
-	public Candidat addPhotoToCandidatAutoFill(Long id, String urlPhoto);
+	public Candidat addPhotoToCandidatAutoFill(UUID id, String urlPhoto);
 	
-	public Candidat addCvOdixToCandidat(Long idCandidat, String urlCvOdix);
+	public Candidat addCvOdixToCandidat(UUID idCandidat, String urlCvOdix);
 	
-	public Candidat addCvOriginalToCandidat(Long idCandidat, String urlCvOriginal);
+	public Candidat addCvOriginalToCandidat(UUID idCandidat, String urlCvOriginal);
 	
-	public Candidat addCvOriginalToCandidatAutoFill(Long idCandidat, String urlCvOriginal);
+	public Candidat addCvOriginalToCandidatAutoFill(UUID idCandidat, String urlCvOriginal);
 
 }

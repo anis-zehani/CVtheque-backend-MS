@@ -1,6 +1,7 @@
 package com.odix.fr.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ProjetServiceImpl implements ProjetService{
 		this.utilisateurService = utilisateurService;
 	}
 	
-	public List<Projet> getAllProjets(Long idUtilisateur) {
+	public List<Projet> getAllProjets(UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 	    

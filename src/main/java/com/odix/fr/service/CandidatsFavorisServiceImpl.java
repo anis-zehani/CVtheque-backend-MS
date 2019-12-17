@@ -1,6 +1,7 @@
 package com.odix.fr.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class CandidatsFavorisServiceImpl implements CandidatsFavorisService {
 	}
 
 	// Lister les Candidats Favoris pour un Utilisateur
-	public List<CandidatsFavoris> getAllCandidatsFavorisForUtilisateur(Long idUtilisateur) {
+	public List<CandidatsFavoris> getAllCandidatsFavorisForUtilisateur(UUID idUtilisateur) {
 		
 		List<CandidatsFavoris> liste = candidatsFavorisRepository.findByIdUtilisateur(idUtilisateur);
 		
@@ -27,7 +28,7 @@ public class CandidatsFavorisServiceImpl implements CandidatsFavorisService {
 	}
 	
 	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
-	public boolean checkIfCandidatExistsDansFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(UUID idUtilisateur, UUID idCandidat) {
 		
 		if(candidatsFavorisRepository.findByIdUtilisateurAndIdCandidat(idUtilisateur, idCandidat) != null)
 			return true;
@@ -41,7 +42,7 @@ public class CandidatsFavorisServiceImpl implements CandidatsFavorisService {
 	}
 
 	// Supprimer un Candidat Favoris pour un Utilisateur
-	public void deleteCandidatFromFavorisToUtilisateur(Long idCandidatFavori) {
+	public void deleteCandidatFromFavorisToUtilisateur(UUID idCandidatFavori) {
 		
 		candidatsFavorisRepository.deleteById(idCandidatFavori);
 	}

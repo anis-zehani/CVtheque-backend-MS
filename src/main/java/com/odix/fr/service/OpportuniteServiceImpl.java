@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +78,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	}
 	
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
-	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie) {
+	public List<Opportunite> getAllOpportunitesByTechnologie(UUID idTechnologie) {
 		return opportuniteRepository.findAllOpportunitesByTechnologie(idTechnologie);
 	}
 	
@@ -94,7 +95,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	
 	
 	//Supprimer le lien entre une opportunité et une technologie
-	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie) {
+	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, UUID idTechnologie) {
 			   opportuniteRepository.deleteLinkOpportuniteTechnologie(idOpportunite, idTechnologie);
 	}
 	

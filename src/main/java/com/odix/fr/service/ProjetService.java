@@ -1,12 +1,13 @@
 package com.odix.fr.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.odix.fr.model.Projet;
 
 public interface ProjetService {
 	
-	public List<Projet> getAllProjets(Long idUtilisateur);
+	public List<Projet> getAllProjets(UUID idUtilisateur);
 	
 	public Projet getProjet(Long id);
 	

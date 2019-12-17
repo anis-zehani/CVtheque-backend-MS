@@ -1,6 +1,7 @@
 package com.odix.fr.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.odix.fr.model.Partenaire;
 
@@ -10,7 +11,7 @@ public interface PartenaireService {
 	
 	public List<Partenaire> getAllPartenairesByEntreprise(Long idEntreprise);
 	
-	public Partenaire getPartenaire(Long id);
+	public Partenaire getPartenaire(UUID id);
 	
 	public Partenaire addPartenaire(Partenaire partenaire);
 	
@@ -20,12 +21,12 @@ public interface PartenaireService {
 	
 	public Partenaire editEtatPartenaire(Partenaire partenaire);
 	
-	public void updateLinkPartenaireEntreprise(Long idPartenaire);
+	public void updateLinkPartenaireEntreprise(UUID idPartenaire);
 	
-	public Boolean deletePartenaire(Long id);
+	public Boolean deletePartenaire(UUID id);
 
-	public Partenaire addPhotoToPartenaire(Long id, String urlPhoto);
+	public Partenaire addPhotoToPartenaire(UUID id, String urlPhoto);
 	
-	public Partenaire addPhotoToPartenaireAutoFill(Long id, String urlPhoto);
+	public Partenaire addPhotoToPartenaireAutoFill(UUID id, String urlPhoto);
 
 }

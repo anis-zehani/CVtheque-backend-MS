@@ -3,6 +3,7 @@ package com.odix.fr.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -25,14 +26,14 @@ public class ContactServiceImpl implements ContactService{
 		this.utilisateurService = utilisateurService;
 	}
 
-	public List<Contact> getAllContacts(Long idUtilisateur) {
+	public List<Contact> getAllContacts(UUID idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		
 		return contactRepository.findAllByUtilisateur(utilisateur);
 	}
 
-	public Optional<Contact> getContact(Long id) {
+	public Optional<Contact> getContact(UUID id) {
 		return contactRepository.findById(id);
 	}
 
@@ -55,7 +56,7 @@ public class ContactServiceImpl implements ContactService{
 	}
 	
 	//Affecter une photo à un contact (fonction appelée dans Ajout + Update)
-	public Contact addPhotoToContact(Long id, String urlPhoto) {
+	public Contact addPhotoToContact(UUID id, String urlPhoto) {
 		
 		if(contactRepository.existsById(id)) {
 			Contact contact = contactRepository.getOne(id);
@@ -92,7 +93,7 @@ public class ContactServiceImpl implements ContactService{
 	}
 
 	//Supprimer un contact
-	public void deleteContact(Long id) {
+	public void deleteContact(UUID id) {
 		
 		if(contactRepository.existsById(id))
 		{

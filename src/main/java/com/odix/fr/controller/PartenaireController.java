@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -45,7 +46,7 @@ public class PartenaireController {
 	}
 	
 	@GetMapping("{id}")
-	public Partenaire getPartenaire(@PathVariable Long id) {
+	public Partenaire getPartenaire(@PathVariable UUID id) {
 		return partenaireService.getPartenaire(id);
 	}
 	
@@ -62,7 +63,7 @@ public class PartenaireController {
 	
 	//Ajouter une photo à un partenaire :
 	@PostMapping("addPhoto/{id}")
-	public Partenaire addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+	public Partenaire addPhoto(@PathVariable UUID id, @RequestParam("file") MultipartFile file) {
 	//la photo est placée sur le serveur
 	String urlPhoto =  storageService.addPhoto(file);
 	//la photo est affectée au partenaire via son id
@@ -86,7 +87,7 @@ public class PartenaireController {
 	}
 	
 	@PostMapping("/addPhotoPartenaireAutoFill/{id}")
-	public Partenaire addPhotoPartenaireAutoFill(@PathVariable Long id, @RequestParam("photoPartenaireAutoFill") MultipartFile photoPartenaireAutoFill) {
+	public Partenaire addPhotoPartenaireAutoFill(@PathVariable UUID id, @RequestParam("photoPartenaireAutoFill") MultipartFile photoPartenaireAutoFill) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(photoPartenaireAutoFill);
 	    //la photo est affectée au partenaire via son id (mode Auto Fill)
@@ -95,12 +96,12 @@ public class PartenaireController {
 	
 	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
 	@PutMapping("/updateLinkPartenaireEntreprise/{idPartenaire}")
-	public void updateLinkPartenaireEntreprise(@PathVariable Long idPartenaire) {
+	public void updateLinkPartenaireEntreprise(@PathVariable UUID idPartenaire) {
 		partenaireService.updateLinkPartenaireEntreprise(idPartenaire);
 	}
 	
 	@DeleteMapping("{id}")
-	public void deletePartenaire(@PathVariable Long id) {
+	public void deletePartenaire(@PathVariable UUID id) {
 		partenaireService.deletePartenaire(id);
 	}
 

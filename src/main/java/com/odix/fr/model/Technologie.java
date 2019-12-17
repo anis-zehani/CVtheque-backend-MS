@@ -1,12 +1,12 @@
 package com.odix.fr.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -22,8 +22,10 @@ public class Technologie implements Serializable {
 	private static final long serialVersionUID = -3422261716301379660L;
 
 	@Id
-	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-	
+	@GeneratedValue
+	@Column(name = "id", updatable = false, nullable = false, unique=true)
+	private UUID id;
+
     @NotEmpty(message="Odix - technologie ne peut pas être vide")
     @Column(unique=true)
     private String nomTechnologie;
@@ -45,17 +47,17 @@ public class Technologie implements Serializable {
 		super();
 	}
 	
-	public Technologie(Long id, String nomTechnologie) {
+	public Technologie(UUID id, String nomTechnologie) {
 		super();
 		this.id = id;
 		this.nomTechnologie = nomTechnologie;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

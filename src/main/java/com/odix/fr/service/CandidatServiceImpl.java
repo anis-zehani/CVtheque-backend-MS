@@ -3,6 +3,7 @@ package com.odix.fr.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,7 +62,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//INNER JOIN : retourne les candidats par Technologie
-	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie){
+	public List<Candidat> getAllCandidatsByTechnologie(UUID idTechnologie){
 			
 		return candidatRepository.findAllCandidatsByTechnologie(idTechnologie);
 	}
@@ -87,21 +88,21 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//Supprimer le lien entre un candidat et une opportunité
-	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite) {
+	public void deleteLinkCandidatOpportunite(UUID idCandidat, Long idOpportunite) {
 		 	   candidatRepository.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
 	
 	//Supprimer le lien entre un candidat et une technologie
-	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie) {
+	public void deleteLinkCandidatTechnologie(UUID idCandidat, UUID idTechnologie) {
 			 	candidatRepository.deleteLinkCandidatTechnologie(idCandidat, idTechnologie);
 	}
 	
 	//Supprimer le lien entre un candidat et une certification
-	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification) {
+	public void deleteLinkCandidatCertification(UUID idCandidat, Long idCertification) {
 				candidatRepository.deleteLinkCandidatCertification(idCandidat, idCertification);
 	}
 
-	public Candidat getCandidat(Long id) {
+	public Candidat getCandidat(UUID id) {
 		return candidatRepository.getOne(id);
 	}
 	
@@ -179,7 +180,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//Affecter une photo à un candidat (fonction appelée dans Ajout + Update)
-	public Candidat addPhotoToCandidat(Long id, String urlPhoto) {
+	public Candidat addPhotoToCandidat(UUID id, String urlPhoto) {
 		
 		if(candidatRepository.existsById(id))
 		{
@@ -201,7 +202,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//Affecter une photo à un candidat (fonction appelée en mode AutoFill dans espace Candidat)
-	public Candidat addPhotoToCandidatAutoFill(Long id, String urlPhoto) {
+	public Candidat addPhotoToCandidatAutoFill(UUID id, String urlPhoto) {
 			
 		if(candidatRepository.existsById(id))
 			{
@@ -223,7 +224,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}	
 	
 	//Ajout du CV Odix
-	public Candidat addCvOdixToCandidat(Long idCandidat, String urlCvOdix) {
+	public Candidat addCvOdixToCandidat(UUID idCandidat, String urlCvOdix) {
 		
 		if(candidatRepository.existsById(idCandidat))
 		{
@@ -251,7 +252,7 @@ public class CandidatServiceImpl implements CandidatService {
 		}
 		
 	//Ajout du CV Original
-	public Candidat addCvOriginalToCandidat(Long idCandidat, String urlCvOriginal) {
+	public Candidat addCvOriginalToCandidat(UUID idCandidat, String urlCvOriginal) {
 			
 		if(candidatRepository.existsById(idCandidat))
 		{
@@ -280,7 +281,7 @@ public class CandidatServiceImpl implements CandidatService {
 		}
 	
 	//Ajout du CV Original en mode AutoFill
-	public Candidat addCvOriginalToCandidatAutoFill(Long idCandidat, String urlCvOriginal) {
+	public Candidat addCvOriginalToCandidatAutoFill(UUID idCandidat, String urlCvOriginal) {
 				
 		if(candidatRepository.existsById(idCandidat))
 			{
@@ -479,7 +480,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//Update le lien entre un candidat et une entreprise : met entreprise à NULL
-	public void updateLinkCandidatEntreprise(Long idCandidat) {
+	public void updateLinkCandidatEntreprise(UUID idCandidat) {
 		
 		if(candidatRepository.existsById(idCandidat))
 		{
@@ -489,7 +490,7 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 	
 	//Supprimer un candidat
-	public void deleteCandidat(Long id) {
+	public void deleteCandidat(UUID id) {
 		
 		if(candidatRepository.existsById(id))
 		{

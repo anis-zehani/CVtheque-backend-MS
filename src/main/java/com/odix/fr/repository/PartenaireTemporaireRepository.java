@@ -1,6 +1,7 @@
 package com.odix.fr.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -11,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.odix.fr.model.PartenaireTemporaire;
 
-public interface PartenaireTemporaireRepository extends JpaRepository<PartenaireTemporaire, Long> {
+public interface PartenaireTemporaireRepository extends JpaRepository<PartenaireTemporaire, UUID> {
 	
 	// Retourne le DISTINCT des emails présents dans la table PartenaireTemporaire
 	@Query(value = "SELECT DISTINCT email FROM Partenaire_temporaire", nativeQuery = true)

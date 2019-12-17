@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -52,7 +53,7 @@ public class CandidatController {
 	
 	//Lister les candidats par ID Technologie
 	@GetMapping("/allCandidatsByTechnologie/{id}")
-	public List<Candidat> getAllCandidatsByTechnologie(@PathVariable Long id) {
+	public List<Candidat> getAllCandidatsByTechnologie(@PathVariable UUID id) {
 	    return candidatService.getAllCandidatsByTechnologie(id);
 	}
 	
@@ -75,7 +76,7 @@ public class CandidatController {
 	}
 	
 	@GetMapping("/oneCandidat/{id}")
-	public Candidat getCandidat(@PathVariable Long id) {
+	public Candidat getCandidat(@PathVariable UUID id) {
 		return candidatService.getCandidat(id);
 	}
 	
@@ -86,7 +87,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/addPhoto/{id}")
-	public Candidat addPhoto(@PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
+	public Candidat addPhoto(@PathVariable UUID id, @RequestParam("photo") MultipartFile photo) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(photo);
 	    //la photo est affectée au candidat via son id
@@ -94,7 +95,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/addPhotoCandidatAutoFill/{id}")
-	public Candidat addPhotoCandidatAutoFill(@PathVariable Long id, @RequestParam("photoAutoFill") MultipartFile photoAutoFill) {
+	public Candidat addPhotoCandidatAutoFill(@PathVariable UUID id, @RequestParam("photoAutoFill") MultipartFile photoAutoFill) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(photoAutoFill);
 	    //la photo est affectée au candidat via son id (mode Auto Fill)
@@ -102,7 +103,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/addCvOdix/{id}")
-	public Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
+	public Candidat addCvOdix(@PathVariable UUID id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
 		//le CvOdix est placé sur le serveur
 	    String urlCvOdix =  storageService.addCvOdix(cvOdix);
 	    //le CvOdix est affecté au candidat via son id
@@ -110,7 +111,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/addCvOriginalCandidatAutoFill/{id}")
-	public Candidat addCvOriginalCandidatAutoFill(@PathVariable Long id, @RequestParam("cvOriginalAutoFill") MultipartFile cvOriginalAutoFill) {
+	public Candidat addCvOriginalCandidatAutoFill(@PathVariable UUID id, @RequestParam("cvOriginalAutoFill") MultipartFile cvOriginalAutoFill) {
 		//le CvOriginal est placé sur le serveur
 	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginalAutoFill);
 	    //le CvOriginal est affecté au candidat via son id (mode Auto Fill)
@@ -118,7 +119,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/addCvOriginal/{id}")
-	public Candidat addCvOriginal(@PathVariable Long id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
+	public Candidat addCvOriginal(@PathVariable UUID id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
 		//le CvOriginal est placé sur le serveur
 	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginal);
 	    //le CvOriginal est affecté au candidat via son id
@@ -151,30 +152,30 @@ public class CandidatController {
 	
 	//Update le lien entre un candidat et une entreprise : met entreprise à NULL
 	@PutMapping("/updateLinkCandidatEntreprise")
-	public void updateLinkCandidatEntreprise(@Valid @RequestBody Long idCandidat) {
+	public void updateLinkCandidatEntreprise(@Valid @RequestBody UUID idCandidat) {
 			   candidatService.updateLinkCandidatEntreprise(idCandidat);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteCandidat(@PathVariable Long id) {
+	public void deleteCandidat(@PathVariable UUID id) {
 			   candidatService.deleteCandidat(id);
 	}
 	
 	//Supprimer le lien entre un candidat et une opportunité
 	@DeleteMapping("/deleteLinkCandidatOpportunite/{idCandidat}/{idOpportunite}")
-	public void deleteLinkCandidatOpportunite(@PathVariable Long idCandidat, @PathVariable Long idOpportunite) {
+	public void deleteLinkCandidatOpportunite(@PathVariable UUID idCandidat, @PathVariable Long idOpportunite) {
 			   candidatService.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
 	
 	//Supprimer le lien entre un candidat et une technologie
 	@DeleteMapping("/deleteLinkCandidatTechnologie/{idCandidat}/{idTechnologie}")
-	public void deleteLinkCandidatTechnologie(@PathVariable Long idCandidat, @PathVariable Long idTechnologie) {
+	public void deleteLinkCandidatTechnologie(@PathVariable UUID idCandidat, @PathVariable UUID idTechnologie) {
 			   candidatService.deleteLinkCandidatTechnologie(idCandidat, idTechnologie);
 	}
 	
 	//Supprimer le lien entre un candidat et une certification
 	@DeleteMapping("/deleteLinkCandidatCertification/{idCandidat}/{idCertification}")
-	public void deleteLinkCandidatCertification(@PathVariable Long idCandidat, @PathVariable Long idCertification) {
+	public void deleteLinkCandidatCertification(@PathVariable UUID idCandidat, @PathVariable Long idCertification) {
 			   candidatService.deleteLinkCandidatCertification(idCandidat, idCertification);
 	}
 

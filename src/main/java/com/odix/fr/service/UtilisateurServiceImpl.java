@@ -1,6 +1,7 @@
 package com.odix.fr.service;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.mail.MessagingException;
 
@@ -34,7 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	}
 
 	
-	public Utilisateur getUtilisateurById(Long id) {
+	public Utilisateur getUtilisateurById(UUID id) {
 		return utilisateurRepository.findUtilisateurById(id);
 	}
 

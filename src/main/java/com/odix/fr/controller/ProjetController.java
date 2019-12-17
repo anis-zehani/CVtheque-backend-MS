@@ -1,6 +1,7 @@
 package com.odix.fr.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -32,7 +33,7 @@ public class ProjetController {
 
 	// Tous les projets par idUtilisateur
 	@GetMapping("/allProjetsByIdUtilisateur/{idUtilisateur}")
-	public List<Projet> getAllProjetsByIdUtilisateur(@PathVariable Long idUtilisateur) {
+	public List<Projet> getAllProjetsByIdUtilisateur(@PathVariable UUID idUtilisateur) {
 		
 		List<Projet> projets = projetService.getAllProjets(idUtilisateur);
 	    return projets;

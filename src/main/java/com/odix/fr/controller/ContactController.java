@@ -3,6 +3,7 @@ package com.odix.fr.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -42,14 +43,14 @@ public class ContactController {
 
 	// Tous les contacts par idUtilisateur
 	@GetMapping("/allContactsByIdUtilisateur/{idUtilisateur}")
-	public List<Contact> getAllContacts(@PathVariable Long idUtilisateur) {
+	public List<Contact> getAllContacts(@PathVariable UUID idUtilisateur) {
 		
 		List<Contact> contacts = contactService.getAllContacts(idUtilisateur);
 	    return contacts;
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Contact> getContact(@PathVariable Long id) {
+	public Optional<Contact> getContact(@PathVariable UUID id) {
 		return contactService.getContact(id);
 	}
 	
@@ -61,7 +62,7 @@ public class ContactController {
 	
 	//Ajouter une photo à un Contact
 	@PostMapping("addPhoto/{id}")
-	public Contact addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+	public Contact addPhoto(@PathVariable UUID id, @RequestParam("file") MultipartFile file) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(file);
 	    //la photo est affectée au contact via son id
@@ -75,7 +76,7 @@ public class ContactController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void deleteContact(@PathVariable Long id) {
+	public void deleteContact(@PathVariable UUID id) {
 		contactService.deleteContact(id);
 	}
 

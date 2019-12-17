@@ -3,6 +3,7 @@ package com.odix.fr.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import com.odix.fr.model.Opportunite;
 
@@ -16,7 +17,7 @@ public interface OpportuniteService {
 	
 	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
 	
-	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie);
+	public List<Opportunite> getAllOpportunitesByTechnologie(UUID idTechnologie);
 	
 	public List<Opportunite> getAllOpportunitesByListTechnologies(ArrayList<Long> listTechnologies);
 	
@@ -34,7 +35,7 @@ public interface OpportuniteService {
 	
 	public void deleteOpportunite(Long idOpportunite);
 	
-	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie);
+	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, UUID idTechnologie);
 	
 	public void deleteLinkOpportuniteCertification(Long idOpportunite, Long idCertification);
 	

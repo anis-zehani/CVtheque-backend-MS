@@ -1,10 +1,12 @@
 package com.odix.fr.service;
 
+import java.util.UUID;
+
 import com.odix.fr.model.Utilisateur;
 
 public interface UtilisateurService {
 	
-	public Utilisateur getUtilisateurById(Long id);
+	public Utilisateur getUtilisateurById(UUID id);
 	
 	public Utilisateur getUtilisateurByUsername(String username);
 	
@@ -17,5 +19,4 @@ public interface UtilisateurService {
 	public Utilisateur resetPasswordUtilisateur(String email, String password);
 	
 	public String getUtilisateurRoleByUsername(String username);
-	
 }

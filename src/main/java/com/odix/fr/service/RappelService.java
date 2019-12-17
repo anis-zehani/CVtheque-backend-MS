@@ -1,21 +1,22 @@
 package com.odix.fr.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.odix.fr.model.Projet;
 import com.odix.fr.model.Rappel;
 
 public interface RappelService {
 	
-	public List<Rappel> getAllRappels(Long idUtilisateur);
+	public List<Rappel> getAllRappels(UUID idUtilisateur);
 	
-	public List<Rappel> getAllRappelsByToday(Long idUtilisateur);
+	public List<Rappel> getAllRappelsByToday(UUID idUtilisateur);
 	
-	public List<Rappel> getAllRappelsByNext7Days(Long idUtilisateur);
+	public List<Rappel> getAllRappelsByNext7Days(UUID idUtilisateur);
 	
-	public List<Rappel> getAllRappelsByProjetAndUtilisateur(Projet projet, Long idUtilisateur);
+	public List<Rappel> getAllRappelsByProjetAndUtilisateur(Projet projet, UUID idUtilisateur);
 	
-	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, Long idUtilisateur);
+	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, UUID idUtilisateur);
 	
 	public List<Rappel> getAllRappelsByTodayAndAllUsers();
 	

@@ -2,6 +2,7 @@ package com.odix.fr.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,7 +51,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			return partenaireRepository.findAllByEntreprise(entreprise);
 	}
-	public Partenaire getPartenaire(Long id) {
+	public Partenaire getPartenaire(UUID id) {
 		return partenaireRepository.getOne(id);
 	}
 
@@ -85,7 +86,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 	}
 	
 	//Affecter une photo à un partenaire (fonction appelée dans Ajout + Update)
-	public Partenaire addPhotoToPartenaire(Long id, String urlPhoto) {
+	public Partenaire addPhotoToPartenaire(UUID id, String urlPhoto) {
 		
 		if(partenaireRepository.existsById(id))
 		{
@@ -185,7 +186,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 
 	// AutoFill Edit PHOTO DE PROFIL Partenaire : à partir de son espace Partenaire
 	@Override
-	public Partenaire addPhotoToPartenaireAutoFill(Long id, String urlPhoto) {
+	public Partenaire addPhotoToPartenaireAutoFill(UUID id, String urlPhoto) {
 		
 		if(partenaireRepository.existsById(id))
 		{
@@ -206,7 +207,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 	}
 
 	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
-	public void updateLinkPartenaireEntreprise(Long idPartenaire) {
+	public void updateLinkPartenaireEntreprise(UUID idPartenaire) {
 		if(partenaireRepository.existsById(idPartenaire))
 		{
 			partenaireRepository.updateLinkPartenaireEntreprise(idPartenaire);
@@ -214,7 +215,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 	}
 	
 	//Supprimer un partenaire
-	public Boolean deletePartenaire(Long id) {
+	public Boolean deletePartenaire(UUID id) {
 		
 		if(partenaireRepository.existsById(id))
 		{

@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -44,35 +45,35 @@ public class RappelController {
 
 	// Tous les rappels par idUtilisateur
 	@GetMapping("/allRappelsByIdUtilisateur/{idUtilisateur}")
-	public List<Rappel> getAlllRappelsByIdUtilisateur(@PathVariable Long idUtilisateur) {
+	public List<Rappel> getAlllRappelsByIdUtilisateur(@PathVariable UUID idUtilisateur) {
 		
 		List<Rappel> rappels = rappelService.getAllRappels(idUtilisateur);
 	    return rappels;
 	}
 	
 	@GetMapping("/allRappelsByToday/{idUtilisateur}")
-	public List<Rappel> getAllRappelsByToday(@PathVariable Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByToday(@PathVariable UUID idUtilisateur) {
 		
 		List<Rappel> rappels = rappelService.getAllRappelsByToday(idUtilisateur);
 		return rappels;
 	}
 	
 	@GetMapping("/allRappelsByNext7Days/{idUtilisateur}")
-	public List<Rappel> getAllRappelsByNext7Days(@PathVariable Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByNext7Days(@PathVariable UUID idUtilisateur) {
 		
 		List<Rappel> rappels = rappelService.getAllRappelsByNext7Days(idUtilisateur);
 		return rappels;
 	}
 	
 	@GetMapping("/allRappelsByProjet/{idProjet}/{idUtilisateur}")
-	public List<Rappel> getAllRappelsByProjet(@PathVariable Long idProjet, @PathVariable Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByProjet(@PathVariable Long idProjet, @PathVariable UUID idUtilisateur) {
 		
 		List<Rappel> rappels = rappelService.getAllRappelsByProjetAndUtilisateur(projetService.getProjet(idProjet), idUtilisateur);
 		return rappels;
 	}
 	
 	@GetMapping("/allRappelsByPriorite/{valeurPriorite}/{idUtilisateur}")
-	public List<Rappel> getAllRappelsByPriorite(@PathVariable String valeurPriorite, @PathVariable Long idUtilisateur) {
+	public List<Rappel> getAllRappelsByPriorite(@PathVariable String valeurPriorite, @PathVariable UUID idUtilisateur) {
 		
 		List<Rappel> rappels = rappelService.getAllRappelsByPrioriteAndUtilisateur(valeurPriorite, idUtilisateur);
 	    return rappels;

@@ -2,6 +2,7 @@ package com.odix.fr.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -37,7 +38,7 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
 	@Query("FROM Opportunite o INNER JOIN o.listeTechnologies o1 ON o1.id = :idTechnologie")
-	List<Opportunite> findAllOpportunitesByTechnologie(@Param("idTechnologie") Long idTechnologie);
+	List<Opportunite> findAllOpportunitesByTechnologie(@Param("idTechnologie") UUID idTechnologie);
 	
 	//INNER JOIN : JPQL : La liste des opportunites qui ont une Technologie au moins dans la liste fournie
 	@Query(value = 
@@ -52,7 +53,7 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 			"DELETE FROM opportunite_technologie o WHERE "
 			+ "o.id_opportunite = ?1 AND o.id_technologie =?2"
 			, nativeQuery = true)
-	void deleteLinkOpportuniteTechnologie(@Param("idOpportunite") Long idOpportunite, @Param("idTechnologie") Long idTechnologie);
+	void deleteLinkOpportuniteTechnologie(@Param("idOpportunite") Long idOpportunite, @Param("idTechnologie") UUID idTechnologie);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	

@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,7 +38,7 @@ public class TechnologieController {
 	}
 	
 	@GetMapping("{id}")
-	public Technologie getTechnologie(@PathVariable Long id) {
+	public Technologie getTechnologie(@PathVariable UUID id) {
 		return technologieService.getTechnologie(id);
 	}
 
@@ -72,7 +73,7 @@ public class TechnologieController {
 	}
 	
 	@DeleteMapping("{id}")
-	public boolean deleteTechnologie(@PathVariable Long id) {
+	public boolean deleteTechnologie(@PathVariable UUID id) {
 		return technologieService.deleteTechnologie(id);
 	}
 
