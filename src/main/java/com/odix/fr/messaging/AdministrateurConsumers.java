@@ -21,7 +21,7 @@ public class AdministrateurConsumers {
 	
     @KafkaListener(topics = "add-administrateur-topic")
     public void addAdministrateurConsumer(String message) throws IOException {
-        System.out.print(String.format("#### -> addAdministrateurConsumer : BackEnd -> %s", message +"\n"));
+        System.out.print(String.format("#### -> addAdministrateurConsumer : BackEnd-MS -> %s", message +"\n"));
 
         try{
         	OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

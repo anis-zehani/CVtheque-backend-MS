@@ -20,7 +20,7 @@ public class CertificationProducers {
     public void addCertificationProducer(Certification certification) {
         try{
 			String value = OBJECT_MAPPER.writeValueAsString(certification);
-			System.out.print(String.format("#### -> addCertificationProducer -> %s", value + "\n"));
+			System.out.print(String.format("#### -> addCertificationProducer : BackEnd-MS -> %s", value + "\n"));
 			this.kafkaTemplate.send("add-certification-topic", value);
         }catch (Exception e){
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class CertificationProducers {
     public void editCertificationProducer(Certification certification) {
         try{
 			String value = OBJECT_MAPPER.writeValueAsString(certification);
-			System.out.print(String.format("#### -> editCertificationProducer -> %s", value + "\n"));
+			System.out.print(String.format("#### -> editCertificationProducer : BackEnd-MS -> %s", value + "\n"));
 			this.kafkaTemplate.send("edit-certification-topic", value);
         }catch (Exception e){
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class CertificationProducers {
     public void deleteCertificationProducer(UUID idCertification) {
         try{
 			
-			System.out.print(String.format("#### -> deleteCertificationProducer -> %s", idCertification + "\n"));
+			System.out.print(String.format("#### -> deleteCertificationProducer : BackEnd-MS -> %s", idCertification + "\n"));
 			this.kafkaTemplate.send("delete-certification-topic", idCertification.toString());
         }catch (Exception e){
             e.printStackTrace();
