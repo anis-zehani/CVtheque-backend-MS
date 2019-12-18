@@ -1,12 +1,12 @@
 package com.odix.fr.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -22,7 +22,9 @@ public class Certification implements Serializable {
 	private static final long serialVersionUID = 1998921502004317093L;
 
 	@Id
-    private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	@GeneratedValue
+	@Column(name = "id", updatable = false, nullable = false, unique=true)
+	private UUID id;
 	
     @NotEmpty(message="Odix - certification ne peut pas être vide")
     @Column(unique=true)
@@ -39,17 +41,17 @@ public class Certification implements Serializable {
 		super();
 	}
 
-    public Certification(Long id, String nomCertification) {
+    public Certification(UUID id, String nomCertification) {
 		super();
 		this.id = id;
 		this.nomCertification = nomCertification;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

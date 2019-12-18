@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,7 +38,7 @@ public class CertificationController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Certification> getCertification(@PathVariable Long id) {
+	public Optional<Certification> getCertification(@PathVariable UUID id) {
 		return certificationService.getCertification(id);
 	}
 	
@@ -54,7 +55,7 @@ public class CertificationController {
 	}
 	
 	@DeleteMapping("{id}")
-	public boolean deleteCertification(@PathVariable Long id) {
+	public boolean deleteCertification(@PathVariable UUID id) {
 		return certificationService.deleteCertification(id);
 	}
 

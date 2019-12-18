@@ -2,15 +2,23 @@ package com.odix.fr.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.odix.fr.messaging.CertificationProducers;
 import com.odix.fr.model.Certification;
 import com.odix.fr.repository.CertificationRepository;
 
 
 @Service
 public class CertificationServiceImpl implements CertificationService{
+	
+	@Autowired
+	CertificationProducers certificationProducers;
 	
 	private final CertificationRepository certificationRepository;
 
@@ -23,38 +31,53 @@ public class CertificationServiceImpl implements CertificationService{
 	    return certificationRepository.findAll();
 	}
 	
-	public Optional<Certification> getCertification(Long id) {
+	public Optional<Certification> getCertification(UUID id) {
 		return certificationRepository.findById(id);
 	}
 	
 	//Ajouter une certification
+	@Transactional
 	public Certification addCertification(Certification certification) 
 	{
 		if(certificationRepository.findByNomCertification(certification.getNomCertification()) == null)
 		{
-			return certificationRepository.save(certification);
+			Certification newCertification = certificationRepository.save(certification);
+			
+			//Consistency avec les autres MS
+			this.certificationProducers.addCertificationProducer(newCertification);
 		}
 		return null;
 	}
 	
 	//Modifier une certification
+	@Transactional
 	public Certification editCertification(Certification certification) 
 	{
 		if(certificationRepository.existsById(certification.getId()))
 		{
-			return certificationRepository.save(certification);
+			certificationRepository.save(certification);
+			
+			//Consistency avec les autres MS
+			this.certificationProducers.editCertificationProducer(certification);
+			
+			return certification;
 		}
 		return null;
 	}
 	
 	//Supprimer une certification
-	public boolean deleteCertification(Long id) 
+	@Transactional
+	public boolean deleteCertification(UUID id) 
 	{
 		if(certificationRepository.existsById(id))
 		{
 			try 
 			{
-				certificationRepository.deleteById(id);
+			certificationRepository.deleteById(id);
+			
+			//Consistency avec les autres MS
+			this.certificationProducers.deleteCertificationProducer(id);
+			
 			return true;
 			}
 			catch(Exception e) 
