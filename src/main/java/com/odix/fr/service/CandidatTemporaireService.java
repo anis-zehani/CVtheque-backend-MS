@@ -8,5 +8,5 @@ public interface CandidatTemporaireService {
 	
 	public Boolean envoiEmailActivationCompteCandidat(String email);
 	
-	public Boolean activationCompteCandidatTemporaire(String email);
+	//public Boolean activationCompteCandidatTemporaire(String email);
 }

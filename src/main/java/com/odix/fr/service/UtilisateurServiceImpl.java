@@ -76,7 +76,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	}
 	
 	// Réinitialisation du Password
-	public Utilisateur resetPasswordUtilisateur(String email, String password) {
+	/*public Utilisateur resetPasswordUtilisateur(String email, String password) {
 		
 		Utilisateur utilisateur = utilisateurRepository.findUtilisateurByEmail(email);
 		//Mise à jour du Password
@@ -109,7 +109,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		}
 		
 		return utilisateurModified;
-	}
+	}*/
 	
 	public String getUtilisateurRoleByUsername(String username) {
 		return utilisateurRepository.findUtilisateurRoleByUsername(username);

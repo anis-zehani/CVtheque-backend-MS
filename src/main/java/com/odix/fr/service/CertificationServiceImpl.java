@@ -45,6 +45,8 @@ public class CertificationServiceImpl implements CertificationService{
 			
 			//Consistency avec les autres MS
 			this.certificationProducers.addCertificationProducer(newCertification);
+			
+			return newCertification;
 		}
 		return null;
 	}

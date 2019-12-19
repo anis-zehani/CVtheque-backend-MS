@@ -3,6 +3,7 @@ package com.odix.fr.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +11,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import lombok.Data;
 	
@@ -28,7 +29,12 @@ public class Opportunite implements Serializable {
 	private static final long serialVersionUID = -3301405585667329930L;
 
 	@Id
-	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	@GeneratedValue
+	@Column(name = "id", updatable = false, nullable = false, unique=true)
+	private UUID id;
+
+	@Version
+	private int version;
 	
 	@Column
 	private String titreOpportunite;
@@ -81,12 +87,20 @@ public class Opportunite implements Serializable {
 		super();
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public int getVersion() {
+		return version;
+	}
+
+	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public String getTitreOpportunite() {

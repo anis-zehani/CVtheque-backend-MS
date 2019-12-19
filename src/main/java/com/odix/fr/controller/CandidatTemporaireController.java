@@ -39,8 +39,8 @@ public class CandidatTemporaireController {
 	}
 	
 	// Activation réelle du nouveau Candidat Temporaire : clic sur le lien dèja envoyé par email
-	@PostMapping("/activation-compte-candidat-temporaire/{email}")
+	/*@PostMapping("/activation-compte-candidat-temporaire/{email}")
 	public Boolean activationCompteCandidatTemporaire(@PathVariable String email) {
 		return candidatTemporaireService.activationCompteCandidatTemporaire(email);
-	}
+	}*/
 }

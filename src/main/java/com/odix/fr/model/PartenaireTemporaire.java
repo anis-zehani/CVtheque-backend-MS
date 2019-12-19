@@ -2,12 +2,13 @@ package com.odix.fr.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import lombok.Data;
 
@@ -21,7 +22,12 @@ public class PartenaireTemporaire implements Serializable {
 	private static final long serialVersionUID = -2655886717769992583L;
 
 	@Id
-    private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	@GeneratedValue
+	@Column(name = "id", updatable = false, nullable = false, unique=true)
+	private UUID id;
+
+	@Version
+	private int version;
 	
 	@Column
 	private String identite;
@@ -50,8 +56,20 @@ public class PartenaireTemporaire implements Serializable {
 	@Column
 	private LocalDateTime dateAjout;
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public String getIdentite() {
@@ -84,10 +102,6 @@ public class PartenaireTemporaire implements Serializable {
 
 	public LocalDateTime getDateAjout() {
 		return dateAjout;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void setIdentite(String identite) {

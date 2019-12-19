@@ -84,7 +84,7 @@ public class CandidatTemporaireServiceImpl implements CandidatTemporaireService 
 	   -Supprimer tous les candidats via email de la table Candidat Temporaire
 	   -Envoyer un email de confirmation : Authentification incluse par défaut
 	 */
-	@Override
+	/*@Override
 	public Boolean activationCompteCandidatTemporaire(String email) {
 		
 		// Cherche un Candidat Temporaire par Email et retourne le tout nouveau dans le cas de plusieurs tentatives via le même email
@@ -142,5 +142,5 @@ public class CandidatTemporaireServiceImpl implements CandidatTemporaireService 
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 }
