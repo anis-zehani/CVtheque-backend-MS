@@ -27,7 +27,6 @@ public class PartenaireConsumers {
         try{
         	OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         	Partenaire partenaire = OBJECT_MAPPER.readValue(message, Partenaire.class);
-        	
             this.partenaireService.addPartenaire(partenaire);
         }catch(Exception e){
             e.printStackTrace();
