@@ -11,6 +11,8 @@ public interface EntrepriseService {
 	
 	public Entreprise getEntreprise(Long id);
 	
+	public Long getCountEntreprises();
+	
 	public Entreprise addEntreprise(Entreprise entreprise);
 	
 	public Entreprise editEntreprise(Entreprise entreprise);

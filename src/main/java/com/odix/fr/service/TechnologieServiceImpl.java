@@ -40,6 +40,10 @@ public class TechnologieServiceImpl implements TechnologieService{
 		return technologieRepository.getOne(id);
 	}
 	
+	public Long getCountTechnologies() {
+		return technologieRepository.count();
+	}
+	
 	//Ajouter une technologie
 	@Transactional
 	public Technologie addTechnologie(Technologie technologie) 

@@ -60,6 +60,12 @@ public class TechnologieController {
 		return technologieService.sumCandiatsAndOpportunitesByTechnologies();
 	}
 	
+	// Feign : Statistiques-MS
+	@GetMapping("/getCountTechnologies")
+	public Long getCountTechnologies() {
+		return technologieService.getCountTechnologies();
+	}
+	
 	//Ajouter une Technologie pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Technologie)
 	@PostMapping()
 	public Technologie addTechnologie(@Valid @RequestBody Technologie technologie) {

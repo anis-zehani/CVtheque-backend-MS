@@ -12,6 +12,8 @@ public interface TechnologieService {
 	
 	public Technologie getTechnologie(UUID id);
 	
+	public Long getCountTechnologies();
+	
 	public Technologie addTechnologie(Technologie technologie);
 	
 	public Technologie editTechnologie(Technologie technologie);

@@ -27,6 +27,10 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 		return entrepriseRepository.getOne(id);
 	}
 	
+	public Long getCountEntreprises() {
+		return entrepriseRepository.count();
+	}
+	
 	//Ajouter une entreprise
 	public Entreprise addEntreprise(Entreprise entreprise)
 	{

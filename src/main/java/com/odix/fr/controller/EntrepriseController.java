@@ -59,6 +59,12 @@ public class EntrepriseController {
 		return entrepriseService.sumCandiatsAndPartenairesByEntreprises();
 	}
 	
+	// Feign : Statistiques-MS
+	@GetMapping("/getCountEntreprises")
+	public Long getCountEntreprises() {
+		return entrepriseService.getCountEntreprises();
+	}
+	
 	//Ajouter une Entreprise pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Entreprise)
 	@PostMapping()
 	public Entreprise addEntreprise(@Valid @RequestBody Entreprise entreprise) {
