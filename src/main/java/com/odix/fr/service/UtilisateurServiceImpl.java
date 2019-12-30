@@ -6,7 +6,6 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +26,8 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	@Autowired
 	JavaMailSenderService mailService;
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
+	//@Autowired
+	//private PasswordEncoder bcryptEncoder;
 	
 	public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
 		super();
@@ -81,7 +80,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		
 		Utilisateur utilisateur = utilisateurRepository.findUtilisateurByEmail(email);
 		//Mise à jour du Password
-		utilisateur.setPassword(bcryptEncoder.encode(password));
+		//utilisateur.setPassword(bcryptEncoder.encode(password));
 		utilisateur.setPassword(password);
 		
 		Utilisateur utilisateurModified = utilisateurRepository.save(utilisateur);
