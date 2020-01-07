@@ -1,13 +1,12 @@
 package com.odix.fr.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Version;
 
 import lombok.Data;
 
@@ -21,52 +20,30 @@ public class CandidatsFavoris implements Serializable {
 	private static final long serialVersionUID = -6140276321360588560L;
 
 	@Id
-	@GeneratedValue
-	@Column(name = "id", updatable = false, nullable = false, unique=true)
-	private UUID id;
-
-	@Version
-	private int version;
+    private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
 	@Column
-	private UUID idUtilisateur;
+	private Long idUtilisateur;
 	
 	@Column
-	private UUID idCandidat;
+	private Long idCandidat;
 	
 	@Column
 	private String identiteCandidat;
 
-	
-	public UUID getId() {
-		return id;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public UUID getIdUtilisateur() {
+	public Long getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
-	public void setIdUtilisateur(UUID idUtilisateur) {
+	public void setIdUtilisateur(Long idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 
-	public UUID getIdCandidat() {
+	public Long getIdCandidat() {
 		return idCandidat;
 	}
 
-	public void setIdCandidat(UUID idCandidat) {
+	public void setIdCandidat(Long idCandidat) {
 		this.idCandidat = idCandidat;
 	}
 

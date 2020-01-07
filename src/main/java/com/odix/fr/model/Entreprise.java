@@ -1,12 +1,12 @@
 package com.odix.fr.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -22,7 +22,9 @@ public class Entreprise implements Serializable {
 	private static final long serialVersionUID = 621044971711896472L;
 
 	@Id
-	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long idEntreprise;
+	@GeneratedValue
+	@Column(name = "idEntreprise", updatable = false, nullable = false, unique=true)
+	private UUID idEntreprise;
 	
 	@NotEmpty(message="Odix - entreprise ne peut pas être vide")
     @Column(unique=true)
@@ -45,17 +47,17 @@ public class Entreprise implements Serializable {
 		super();
 	}
 
-	public Entreprise(Long idEntreprise, String nomEntreprise) {
+	public Entreprise(UUID idEntreprise, String nomEntreprise) {
 		super();
 		this.idEntreprise = idEntreprise;
 		this.nomEntreprise = nomEntreprise;
 	}
 
-	public Long getIdEntreprise() {
+	public UUID getIdEntreprise() {
 		return idEntreprise;
 	}
 
-	public void setIdEntreprise(Long idEntreprise) {
+	public void setIdEntreprise(UUID idEntreprise) {
 		this.idEntreprise = idEntreprise;
 	}
 

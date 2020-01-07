@@ -3,6 +3,7 @@ package com.odix.fr.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 		return entrepriseRepository.findAll();
 	}
 	
-	public Entreprise getEntreprise(Long id){
+	public Entreprise getEntreprise(UUID id){
 		return entrepriseRepository.getOne(id);
 	}
 	
@@ -52,7 +53,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 	}
 	
 	//Supprimer une entreprise
-	public boolean deleteEntreprise(Long id)
+	public boolean deleteEntreprise(UUID id)
 	{
 		if(entrepriseRepository.existsById(id))
 		{
@@ -71,7 +72,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 	
 	// Statistiques : UPDATE le nombre des Candidats liés et des Partenaires liés à une Technologie
 	@Override
-	public void updateNombreCandidatsAndNombrePartenairesStats(Long idEntreprise, Integer nombreCandidats, Integer nombrePartenaires) {
+	public void updateNombreCandidatsAndNombrePartenairesStats(UUID idEntreprise, Integer nombreCandidats, Integer nombrePartenaires) {
 		
 		entrepriseRepository.updateNombreCandidatsAndNombrePartenairesStats(idEntreprise, nombreCandidats, nombrePartenaires);
 	}

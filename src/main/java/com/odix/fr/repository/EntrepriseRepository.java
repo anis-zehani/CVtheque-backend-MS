@@ -1,6 +1,7 @@
 package com.odix.fr.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.odix.fr.model.Entreprise;
 
 @Repository
-public interface EntrepriseRepository extends JpaRepository<Entreprise, Long> {
+public interface EntrepriseRepository extends JpaRepository<Entreprise, UUID> {
 	
 	Entreprise findByNomEntreprise(@Param("nomEntreprise") String nomEntreprise);
 	
@@ -21,7 +22,7 @@ public interface EntrepriseRepository extends JpaRepository<Entreprise, Long> {
 	@Modifying
 	@Transactional
 	@Query("UPDATE Entreprise e SET e.statNombreCandidatsLies = :nombreCandidats, e.statNombrePartenairesLies = :nombrePartenaires WHERE e.id = :idEntreprise")
-	void updateNombreCandidatsAndNombrePartenairesStats(@Param("idEntreprise") Long idEntreprise, @Param("nombreCandidats") Integer nombreCandidats, @Param("nombrePartenaires") Integer nombrePartenaires);
+	void updateNombreCandidatsAndNombrePartenairesStats(@Param("idEntreprise") UUID idEntreprise, @Param("nombreCandidats") Integer nombreCandidats, @Param("nombrePartenaires") Integer nombrePartenaires);
 
 		
 	// Retourne la liste des 5 premières Entreprise ORDER BY le nombre des Candidats qu'il y a pour elle

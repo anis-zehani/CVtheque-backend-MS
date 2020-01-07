@@ -39,7 +39,7 @@ public interface CandidatRepository extends JpaRepository<Candidat, UUID> {
 			"DELETE FROM candidat_opportunite c WHERE "
 			+ "c.id_candidat = ?1 AND c.id_opportunite =?2"
 			, nativeQuery = true)
-	void deleteLinkCandidatOpportunite(@Param("idCandidat") UUID idCandidat, @Param("idOpportunite") Long idOpportunite);
+	void deleteLinkCandidatOpportunite(@Param("idCandidat") Long idCandidat, @Param("idOpportunite") Long idOpportunite);
 	
 	//Native Query = true : Supprimer tous les liens entre les candidats et une opportunité
 	@Modifying
@@ -57,12 +57,12 @@ public interface CandidatRepository extends JpaRepository<Candidat, UUID> {
 			"INSERT INTO candidat_opportunite (id_candidat, id_opportunite) "
 			+ "VALUES(?1 , ?2)"
 			, nativeQuery = true)
-	void addCandidatToOpportunite(@Param("idCandidat") UUID idCandidat, @Param("idOpportunite") Long idOpportunite);
+	void addCandidatToOpportunite(@Param("idCandidat") Long idCandidat, @Param("idOpportunite") Long idOpportunite);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//INNER JOIN : JPQL : La liste des candidats pour une Technologie
 	@Query("FROM Candidat c INNER JOIN c.listeTechnologies c1 ON c1.id = :idTechnologie")
-	List<Candidat> findAllCandidatsByTechnologie(@Param("idTechnologie") UUID idTechnologie);
+	List<Candidat> findAllCandidatsByTechnologie(@Param("idTechnologie") Long idTechnologie);
 	
 	
 	@Query(value = 
@@ -81,7 +81,7 @@ public interface CandidatRepository extends JpaRepository<Candidat, UUID> {
 			"DELETE FROM candidat_technologie c WHERE "
 			+ "c.id_candidat = ?1 AND c.id_technologie =?2"
 			, nativeQuery = true)
-	void deleteLinkCandidatTechnologie(@Param("idCandidat") UUID idCandidat, @Param("idTechnologie") UUID idTechnologie);
+	void deleteLinkCandidatTechnologie(@Param("idCandidat") Long idCandidat, @Param("idTechnologie") Long idTechnologie);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -96,7 +96,7 @@ public interface CandidatRepository extends JpaRepository<Candidat, UUID> {
 			"DELETE FROM candidat_certification c WHERE "
 			+ "c.id_candidat = ?1 AND c.id_certification =?2"
 			, nativeQuery = true)
-	void deleteLinkCandidatCertification(@Param("idCandidat") UUID idCandidat, @Param("idCertification") Long idCertification);
+	void deleteLinkCandidatCertification(@Param("idCandidat") Long idCandidat, @Param("idCertification") Long idCertification);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -108,5 +108,5 @@ public interface CandidatRepository extends JpaRepository<Candidat, UUID> {
 	@Modifying
 	@Transactional
 	@Query("UPDATE Candidat c SET c.entreprise = null WHERE c.id = :idCandidat")
-	void updateLinkCandidatEntreprise(@Param("idCandidat") UUID idCandidat);
+	void updateLinkCandidatEntreprise(@Param("idCandidat") Long idCandidat);
 }

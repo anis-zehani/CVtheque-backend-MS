@@ -1,7 +1,6 @@
 package com.odix.fr.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -31,8 +30,8 @@ public class CertificationServiceImpl implements CertificationService{
 	    return certificationRepository.findAll();
 	}
 	
-	public Optional<Certification> getCertification(UUID id) {
-		return certificationRepository.findById(id);
+	public Certification getCertification(UUID id) {
+		return certificationRepository.getOne(id);
 	}
 	
 	//Ajouter une certification

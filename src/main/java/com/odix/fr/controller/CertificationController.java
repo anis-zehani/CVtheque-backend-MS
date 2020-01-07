@@ -1,7 +1,6 @@
 package com.odix.fr.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -38,7 +37,7 @@ public class CertificationController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Certification> getCertification(@PathVariable UUID id) {
+	public Certification getCertification(@PathVariable UUID id) {
 		return certificationService.getCertification(id);
 	}
 	

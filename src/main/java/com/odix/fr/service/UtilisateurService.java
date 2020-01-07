@@ -14,9 +14,12 @@ public interface UtilisateurService {
 	
 	public Utilisateur getUtilisateurByRole(String role);
 	
-	public Boolean sendEmailResetPassword(String email);
-	
-	public Utilisateur resetPasswordUtilisateur(String email, String password);
-	
 	public String getUtilisateurRoleByUsername(String username);
+	
+	public Utilisateur addUtilisateur(Utilisateur utilisateur);
+	
+	public Utilisateur editUtilisateur(Utilisateur utilisateur);
+	
+	public void deleteUtilisateur(UUID id);
+	
 }

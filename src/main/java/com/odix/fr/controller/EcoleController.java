@@ -1,7 +1,7 @@
 package com.odix.fr.controller;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,7 +37,7 @@ public class EcoleController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Ecole> getEcole(@PathVariable Long id) {
+	public Ecole getEcole(@PathVariable UUID id) {
 		return écoleService.getEcole(id);
 	}
 	
@@ -54,7 +54,7 @@ public class EcoleController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void deleteEcole(@PathVariable Long id) {
+	public void deleteEcole(@PathVariable UUID id) {
 		écoleService.deleteEcole(id);
 	}
 

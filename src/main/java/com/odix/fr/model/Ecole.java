@@ -1,12 +1,12 @@
 package com.odix.fr.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -22,7 +22,9 @@ public class Ecole implements Serializable {
 	private static final long serialVersionUID = -858562105980175964L;
 
 	@Id
-    private @GeneratedValue(strategy = GenerationType.IDENTITY) Long idEcole;
+	@GeneratedValue
+	@Column(name = "idEcole", updatable = false, nullable = false, unique=true)
+	private UUID idEcole;
 	
     @NotEmpty(message="Odix - école ne peut pas être vide")
     @Column(unique=true)
@@ -39,17 +41,17 @@ public class Ecole implements Serializable {
 		super();
 	}
 
-    public Ecole(Long idEcole, String nomEcole) {
+    public Ecole(UUID idEcole, String nomEcole) {
 		super();
 		this.idEcole = idEcole;
 		this.nomEcole = nomEcole;
 	}
 
-	public Long getIdEcole() {
+	public UUID getIdEcole() {
 		return idEcole;
 	}
 
-	public void setIdEcole(Long idEcole) {
+	public void setIdEcole(UUID idEcole) {
 		this.idEcole = idEcole;
 	}
 

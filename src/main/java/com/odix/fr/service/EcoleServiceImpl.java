@@ -1,7 +1,7 @@
 package com.odix.fr.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,8 @@ public class EcoleServiceImpl implements EcoleService{
 		return ecoleRepository.findAll();
 	}
 	
-	public Optional<Ecole> getEcole(Long id){
-		return ecoleRepository.findById(id);
+	public Ecole getEcole(UUID id){
+		return ecoleRepository.getOne(id);
 	}
 	
 	//Ajouter une école
@@ -47,7 +47,7 @@ public class EcoleServiceImpl implements EcoleService{
 	}
 	
 	//Supprimer une école
-	public void deleteEcole(Long id)
+	public void deleteEcole(UUID id)
 	{
 		if(ecoleRepository.existsById(id))
 		{
