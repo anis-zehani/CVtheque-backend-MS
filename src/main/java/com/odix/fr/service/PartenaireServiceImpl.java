@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.odix.fr.model.Entreprise;
@@ -20,9 +18,6 @@ public class PartenaireServiceImpl implements PartenaireService{
 
 	private final PartenaireRepository partenaireRepository;
 	private final LocalStorageService storageService;
-	
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
 
 	PartenaireServiceImpl(PartenaireRepository partenaireRepository, LocalStorageService storageService) {
 		super();
@@ -76,7 +71,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			if(partenaire.getPassword() != null) {
 				//Encoder le Password avant de l'insérer dans la base
-				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+				partenaire.setPassword(partenaire.getPassword());
 			}	
 			return partenaireRepository.save(partenaire);
 			}
@@ -124,7 +119,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
 			if(!passwordFormulaire.equals(passwordBDD)) {
-				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+				partenaire.setPassword(partenaire.getPassword());
 			}
 			// Sinon on réinsére l'ancien password
 			else {

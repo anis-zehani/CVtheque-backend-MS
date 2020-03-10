@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.odix.fr.model.Candidat;
 import com.odix.fr.service.CandidatService;
@@ -44,38 +43,32 @@ public class CandidatController {
 	    return candidatService.getAllCandidats(etatCandidat);
 	}
 	
-	//Lister les candidats par ID Opportunité
-	@GetMapping("/allCandidatsByOpportunite/{id}")
-	public List<Candidat> getAllCandidatsByOpportunite(@PathVariable Long id) {
-	    return candidatService.getAllCandidatsByOpportunite(id);
-	}
-	
 	//Lister les candidats par ID Technologie
 	@GetMapping("/allCandidatsByTechnologie/{id}")
-	public List<Candidat> getAllCandidatsByTechnologie(@PathVariable Long id) {
+	public List<Candidat> getAllCandidatsByTechnologie(@PathVariable UUID id) {
 	    return candidatService.getAllCandidatsByTechnologie(id);
 	}
 	
 	@GetMapping("/allCandidatsByListTechnologies/{listTechnologies}")
 	//La liste des candidats qui ont une Technologie au moins dans la liste fournie
-	public List<Candidat> getAllCandidatsByListTechnologies(@PathVariable ArrayList<Long> listTechnologies){
+	public List<Candidat> getAllCandidatsByListTechnologies(@PathVariable ArrayList<UUID> listTechnologies){
 		return candidatService.getAllCandidatsByListTechnologies(listTechnologies);
 	}
 	
 	//Lister les candidats par ID Certification
 	@GetMapping("/allCandidatsByCertification/{id}")
-	public List<Candidat> getAllCandidatsByCertification(@PathVariable Long id) {
+	public List<Candidat> getAllCandidatsByCertification(@PathVariable UUID id) {
 	    return candidatService.getAllCandidatsByCertification(id);
 	}
 	
 	//Lister les candidats par ID Entreprise
 	@GetMapping("/allCandidatsByEntreprise/{id}")
-	public List<Candidat> getAllCandidatsByEntreprise(@PathVariable Long id) {
+	public List<Candidat> getAllCandidatsByEntreprise(@PathVariable UUID id) {
 	    return candidatService.getAllCandidatsByEntreprise(id);
 	}
 	
 	@GetMapping("/oneCandidat/{id}")
-	public Candidat getCandidat(@PathVariable Long id) {
+	public Candidat getCandidat(@PathVariable UUID id) {
 		return candidatService.getCandidat(id);
 	}
 	
@@ -85,63 +78,9 @@ public class CandidatController {
 		return candidatService.addCandidat(candidat);
 	}
 	
-	@PostMapping("/addPhoto/{id}")
-	public Candidat addPhoto(@PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
-		//la photo est placée sur le serveur
-	    String urlPhoto =  storageService.addPhoto(photo);
-	    //la photo est affectée au candidat via son id
-	    return candidatService.addPhotoToCandidat(id, urlPhoto);
-	}
-	
-	@PostMapping("/addPhotoCandidatAutoFill/{id}")
-	public Candidat addPhotoCandidatAutoFill(@PathVariable Long id, @RequestParam("photoAutoFill") MultipartFile photoAutoFill) {
-		//la photo est placée sur le serveur
-	    String urlPhoto =  storageService.addPhoto(photoAutoFill);
-	    //la photo est affectée au candidat via son id (mode Auto Fill)
-	    return candidatService.addPhotoToCandidatAutoFill(id, urlPhoto);
-	}
-	
-	@PostMapping("/addCvOdix/{id}")
-	public Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
-		//le CvOdix est placé sur le serveur
-	    String urlCvOdix =  storageService.addCvOdix(cvOdix);
-	    //le CvOdix est affecté au candidat via son id
-	    return candidatService.addCvOdixToCandidat(id, urlCvOdix);
-	}
-	
-	@PostMapping("/addCvOriginalCandidatAutoFill/{id}")
-	public Candidat addCvOriginalCandidatAutoFill(@PathVariable Long id, @RequestParam("cvOriginalAutoFill") MultipartFile cvOriginalAutoFill) {
-		//le CvOriginal est placé sur le serveur
-	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginalAutoFill);
-	    //le CvOriginal est affecté au candidat via son id (mode Auto Fill)
-	    return candidatService.addCvOriginalToCandidatAutoFill(id, urlCvOriginal);
-	}
-	
-	@PostMapping("/addCvOriginal/{id}")
-	public Candidat addCvOriginal(@PathVariable Long id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
-		//le CvOriginal est placé sur le serveur
-	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginal);
-	    //le CvOriginal est affecté au candidat via son id
-	    return candidatService.addCvOriginalToCandidat(id, urlCvOriginal);
-	}
-	
-	//Permet de lier des candidats à une opportunité récement créée
-	@PostMapping("/addCandidatsToOpportunite/{idOpportunite}/{withDeletion}")
-	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestBody ArrayList<Candidat> listeCandidats, @PathVariable boolean withDeletion) {
-
-		candidatService.addCandidatsToOpportunite(idOpportunite, listeCandidats, withDeletion);
-	}
-	
-	
 	@PutMapping()
 	public Candidat editCandidat(@Valid @RequestBody Candidat candidat) {
 		return candidatService.editCandidat(candidat);
-	}
-	
-	// Le candidat modifie son profil par lui même via son Espace Candidat
-	@PutMapping("/editCandidatAutoFill")
-	public Candidat editCandidatAutoFill(@Valid @RequestBody Candidat candidat) {
-		return candidatService.editCandidatAutoFill(candidat);
 	}
 	
 	@PutMapping("/editEtat")
@@ -151,30 +90,24 @@ public class CandidatController {
 	
 	//Update le lien entre un candidat et une entreprise : met entreprise à NULL
 	@PutMapping("/updateLinkCandidatEntreprise")
-	public void updateLinkCandidatEntreprise(@Valid @RequestBody Long idCandidat) {
+	public void updateLinkCandidatEntreprise(@Valid @RequestBody UUID idCandidat) {
 			   candidatService.updateLinkCandidatEntreprise(idCandidat);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteCandidat(@PathVariable Long id) {
+	public void deleteCandidat(@PathVariable UUID id) {
 			   candidatService.deleteCandidat(id);
-	}
-	
-	//Supprimer le lien entre un candidat et une opportunité
-	@DeleteMapping("/deleteLinkCandidatOpportunite/{idCandidat}/{idOpportunite}")
-	public void deleteLinkCandidatOpportunite(@PathVariable Long idCandidat, @PathVariable Long idOpportunite) {
-			   candidatService.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
 	
 	//Supprimer le lien entre un candidat et une technologie
 	@DeleteMapping("/deleteLinkCandidatTechnologie/{idCandidat}/{idTechnologie}")
-	public void deleteLinkCandidatTechnologie(@PathVariable Long idCandidat, @PathVariable Long idTechnologie) {
+	public void deleteLinkCandidatTechnologie(@PathVariable UUID idCandidat, @PathVariable UUID idTechnologie) {
 			   candidatService.deleteLinkCandidatTechnologie(idCandidat, idTechnologie);
 	}
 	
 	//Supprimer le lien entre un candidat et une certification
 	@DeleteMapping("/deleteLinkCandidatCertification/{idCandidat}/{idCertification}")
-	public void deleteLinkCandidatCertification(@PathVariable Long idCandidat, @PathVariable Long idCertification) {
+	public void deleteLinkCandidatCertification(@PathVariable UUID idCandidat, @PathVariable UUID idCertification) {
 			   candidatService.deleteLinkCandidatCertification(idCandidat, idCertification);
 	}
 

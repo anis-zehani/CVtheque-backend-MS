@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.odix.fr.model.Collaborateur;
@@ -15,9 +13,6 @@ import com.odix.fr.repository.CollaborateurRepository;
 public class CollaborateurServiceImpl implements CollaborateurService{
 	
 	private final CollaborateurRepository collaborateurRepository;
-	
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
 	
 	CollaborateurServiceImpl(CollaborateurRepository collaborateurRepository) {
 		super();
@@ -40,7 +35,7 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 			if(collaborateur.getPassword() != null)
 			{
 				//Encoder le Password avant de l'insérer dans la base
-				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
+				collaborateur.setPassword(collaborateur.getPassword());
 			}
 
 			return collaborateurRepository.save(collaborateur);
@@ -63,7 +58,7 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
 			if(!passwordFormulaire.equals(passwordBDD))
 			{
-				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
+				collaborateur.setPassword(collaborateur.getPassword());
 			}
 			// Sinon on réinsére l'ancien password
 			else

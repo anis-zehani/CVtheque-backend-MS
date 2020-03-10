@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,7 +38,7 @@ public class EntrepriseController {
 	}
 	
 	@GetMapping("{id}")
-	public Entreprise getEntreprise(@PathVariable Long id) {
+	public Entreprise getEntreprise(@PathVariable UUID id) {
 		return entrepriseService.getEntreprise(id);
 	}
 	
@@ -78,7 +79,7 @@ public class EntrepriseController {
 	}
 	
 	@DeleteMapping("{id}")
-	public boolean deleteEntreprise(@PathVariable Long id) {
+	public boolean deleteEntreprise(@PathVariable UUID id) {
 		return entrepriseService.deleteEntreprise(id);
 	}
 

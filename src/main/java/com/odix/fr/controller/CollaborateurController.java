@@ -2,6 +2,7 @@ package com.odix.fr.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -37,7 +38,7 @@ public class CollaborateurController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Collaborateur> getCollaborateur(@PathVariable Long id) {
+	public Optional<Collaborateur> getCollaborateur(@PathVariable UUID id) {
 		return collaborateurService.getCollaborateur(id);
 	}
 	
@@ -54,7 +55,7 @@ public class CollaborateurController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void deleteCollaborateur(@PathVariable Long id) {
+	public void deleteCollaborateur(@PathVariable UUID id) {
 		collaborateurService.deleteCollaborateur(id);
 	}
 
