@@ -1,0 +1,36 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1 #  tells deployment to run 1 pod matching the template
+  selector:
+    matchLabels:
+      app: backend
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend-container
+        image: registry.gitlab.com/gitlabodix/backend-ms
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 8001
+      targetPort: 8001
+
