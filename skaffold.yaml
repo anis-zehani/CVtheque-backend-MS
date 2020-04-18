@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+metadata:
+  name: backend-ms
+build:
+  artifacts:
+  - image: registry.gitlab.com/gitlabodix/cvtheque-backend-ms-prod
+deploy:
+  kubectl:
+    manifests:
+    - Kubernetes.yml

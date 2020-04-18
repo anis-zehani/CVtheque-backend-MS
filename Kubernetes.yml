@@ -3,23 +3,24 @@ kind: Deployment
 metadata:
   name: backend-deployment
   labels:
-    app: backend
+    app: backend-MS
 spec:
-  replicas: 1 #  tells deployment to run 1 pod matching the template
+  replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: backend-MS
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: backend
+        app: backend-MS
     spec:
       containers:
       - name: backend-container
         image: registry.gitlab.com/gitlabodix/cvtheque-backend-ms-prod
-        imagePullPolicy: Always
+        args: ["--spring.profiles.active=prod"]
+        imagePullPolicy: Never
         ports:
         - containerPort: 8001
       imagePullSecrets:
@@ -31,7 +32,7 @@ metadata:
   name: backend-service
 spec:
   selector:
-    app: backend
+    app: backend-MS
   ports:
     - port: 8001
       targetPort: 8001
