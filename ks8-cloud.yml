@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: registry.gitlab.com/gitlabodix/cvtheque-backend-ms-prod
+        image: registry.gitlab.com/gitlabodix/cvtheque-backend-ms-prod:latest
         args: ["--spring.profiles.active=prod"]
         imagePullPolicy: Always
         ports:
