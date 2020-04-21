@@ -6,10 +6,10 @@ metadata:
   name: gitlab-secrets-backend-ms
 type: Opaque
 data:
-  docker-server: cmVnaXN0cnkuZ2l0bGFiLmNvbQ==
-  docker-username: R2l0TGFiT2RpeAo=
-  docker-password: Z2RmZmcrNWRmZ2Y4OG5wbzI0eHdtNDFhCg==
-  docker-email: YXphaGVuaUBzbWFydGdyYXBoZS5jb20K
+  docker-server: registry.gitlab.com/gitlabodix/cvtheque-backend-ms-prod
+  docker-username: GitLabOdix
+  docker-password: gdffg+5dfgf88npo24xwm41a
+  docker-email: azaheni@smartgraphe.com
 #################### Deployment ####################
 ---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
