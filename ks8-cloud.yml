@@ -6,7 +6,7 @@ metadata:
   name: gitlab-secrets-backend-ms
 type: Opaque
 data:
-  docker-server: cmVnaXN0cnkuZ2l0bGFiLmNvbS9naXRsYWJvZGl4L2N2dGhlcXVlLWJhY2tlbmQtbXMtcHJvZAo=
+  docker-server: cmVnaXN0cnkuZ2l0bGFiLmNvbQ==
   docker-username: R2l0TGFiT2RpeAo=
   docker-password: Z2RmZmcrNWRmZ2Y4OG5wbzI0eHdtNDFhCg==
   docker-email: YXphaGVuaUBzbWFydGdyYXBoZS5jb20K
